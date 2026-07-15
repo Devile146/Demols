@@ -25,6 +25,7 @@
             position: relative;
         }
 
+        /* Subtle background decoration */
         body::before {
             content: '';
             position: fixed;
@@ -35,6 +36,9 @@
             z-index: 0;
         }
 
+        /* ============================================================
+           LOGIN CONTAINER — CLEAN & PROFESSIONAL
+           ============================================================ */
         .login-container {
             width: min(400px, 95%);
             max-width: 400px;
@@ -58,6 +62,9 @@
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.12), 0 10px 40px rgba(0, 0, 0, 0.05);
         }
 
+        /* ============================================================
+           HEADER
+           ============================================================ */
         .login-header {
             text-align: center;
             margin-bottom: 10px;
@@ -93,6 +100,9 @@
             border: 1px solid rgba(0, 0, 0, 0.04);
         }
 
+        /* ============================================================
+           LOGIN SMALL TITLE
+           ============================================================ */
         .login-big {
             text-align: center;
             margin: 4px 0 14px;
@@ -106,6 +116,9 @@
             text-transform: uppercase;
         }
 
+        /* ============================================================
+           INPUT FIELDS
+           ============================================================ */
         .input-group {
             margin-bottom: 16px;
             position: relative;
@@ -156,6 +169,9 @@
             padding-right: 48px;
         }
 
+        /* ============================================================
+           TOGGLE PASSWORD
+           ============================================================ */
         .toggle-password {
             position: absolute;
             right: 16px;
@@ -177,6 +193,9 @@
             transform: translateY(-50%) scale(1.1);
         }
 
+        /* ============================================================
+           LOGIN BUTTON — COLORFUL ANIMATION
+           ============================================================ */
         .login-btn {
             width: 100%;
             background: linear-gradient(135deg, #ff0066, #ff6600, #ffcc00, #00ff88, #0066ff, #9900ff);
@@ -226,6 +245,9 @@
             z-index: 1;
         }
 
+        /* ============================================================
+           TIMER BOX
+           ============================================================ */
         .timer-box {
             background: rgba(255, 200, 200, 0.15);
             border-radius: 14px;
@@ -239,6 +261,9 @@
             font-weight: 600;
         }
 
+        /* ============================================================
+           ADMIN BUTTON
+           ============================================================ */
         .admin-section {
             text-align: center;
             margin: 8px 0 4px;
@@ -269,6 +294,9 @@
             transform: translateY(0px) scale(0.97);
         }
 
+        /* ============================================================
+           FOOTER
+           ============================================================ */
         .login-footer {
             text-align: center;
             margin-top: 18px;
@@ -284,6 +312,9 @@
             margin: 2px 0;
         }
 
+        /* ============================================================
+           ERROR MESSAGE
+           ============================================================ */
         .error-msg {
             color: #cc3344;
             text-align: center;
@@ -293,28 +324,69 @@
             min-height: 24px;
         }
 
+        /* ============================================================
+           RESPONSIVE — PERFECT FOR 360px TO 580px
+           ============================================================ */
         @media (max-width: 420px) {
-            .login-container { padding: 24px 18px 22px; border-radius: 24px; }
-            .login-header h1 { font-size: 1.8rem; }
-            .login-big h2 { font-size: 0.85rem; }
-            .login-btn { padding: 12px; font-size: 0.95rem; border-radius: 12px; }
-            .input-group input { padding: 12px 16px; font-size: 0.85rem; border-radius: 12px; }
-            .admin-btn { padding: 10px 22px; font-size: 0.8rem; }
-            .toggle-password { font-size: 1rem; right: 14px; }
+            .login-container {
+                padding: 24px 18px 22px;
+                border-radius: 24px;
+            }
+            .login-header h1 {
+                font-size: 1.8rem;
+            }
+            .login-big h2 {
+                font-size: 0.85rem;
+            }
+            .login-btn {
+                padding: 12px;
+                font-size: 0.95rem;
+                border-radius: 12px;
+            }
+            .input-group input {
+                padding: 12px 16px;
+                font-size: 0.85rem;
+                border-radius: 12px;
+            }
+            .admin-btn {
+                padding: 10px 22px;
+                font-size: 0.8rem;
+            }
+            .toggle-password {
+                font-size: 1rem;
+                right: 14px;
+            }
         }
 
         @media (min-width: 421px) and (max-width: 580px) {
-            .login-container { padding: 28px 22px 24px; border-radius: 26px; }
-            .login-header h1 { font-size: 2rem; }
-            .login-big h2 { font-size: 0.9rem; }
+            .login-container {
+                padding: 28px 22px 24px;
+                border-radius: 26px;
+            }
+            .login-header h1 {
+                font-size: 2rem;
+            }
+            .login-big h2 {
+                font-size: 0.9rem;
+            }
         }
 
         @media (min-width: 581px) {
-            .login-container { padding: 36px 32px 30px; border-radius: 32px; }
-            .login-header h1 { font-size: 2.4rem; }
-            .login-big h2 { font-size: 1rem; }
+            .login-container {
+                padding: 36px 32px 30px;
+                border-radius: 32px;
+            }
+            .login-header h1 {
+                font-size: 2.4rem;
+            }
+            .login-big h2 {
+                font-size: 1rem;
+            }
         }
 
+        /* ============================================================
+           SCROLLBAR
+           ============================================================ */
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: #f0f2f5; border-radius: 10px; }
         ::-webkit-scrollbar-thumb {
@@ -325,26 +397,32 @@
 </head>
 <body>
     <div class="login-container">
+        <!-- ===== HEADER ===== -->
         <div class="login-header">
-            <h1>✦ FAHAD TECH ✦</h1>
+            <h1>𝕄𝔸𝕃𝕀𝕂-𝕏 ℍ𝟜ℂ𝕂𝕊</h1>
             <p>🔐 SECURE ACCESS</p>
         </div>
 
+        <!-- ===== LOGIN TITLE — SMALL TEXT ===== -->
         <div class="login-big">
             <h2>Login First</h2>
         </div>
 
+        <!-- ===== ERROR MESSAGE ===== -->
         <div id="errorMsg" class="error-msg"></div>
 
+        <!-- ===== TIMER BOX ===== -->
         <div id="timerBox" class="timer-box">
             ⏳ Too many attempts. Wait <span id="timerSeconds">120</span> seconds
         </div>
 
+        <!-- ===== USERNAME ===== -->
         <div class="input-group">
             <label>Username</label>
             <input type="text" id="username" placeholder="Enter your username" autocomplete="off">
         </div>
 
+        <!-- ===== PASSWORD ===== -->
         <div class="input-group">
             <label>Password</label>
             <div class="password-wrapper">
@@ -353,22 +431,30 @@
             </div>
         </div>
 
+        <!-- ===== LOGIN BUTTON ===== -->
         <button class="login-btn" onclick="attemptLogin()"><span>✦ ACCESS TOOLKIT ✦</span></button>
 
+        <!-- ===== ADMIN BUTTON ===== -->
         <div class="admin-section">
-            <a href="https://wa.me/923251138960?text=Hello%20Sir%20Give%20Me%20Login%20Keys" class="admin-btn" target="_blank">👑 Contact Admin</a>
+            <a href="https://wa.me/923267432696?text=Hello%20Sir%20Give%20Me%20Login%20Keys" class="admin-btn" target="_blank">👑 Contact Admin</a>
         </div>
 
+        <!-- ===== FOOTER ===== -->
         <div class="login-footer">
-            <p>© 2026 FAHAD TECH — All Rights Reserved</p>
-            <p>🔒 Secure Login System</p>
+            <p>© 2026 MALIK-X H4CKER —
+            <p> All Rights Reserved</p>
+           
         </div>
     </div>
 
     <script>
+        // ============================================================
+        // TOGGLE PASSWORD VISIBILITY
+        // ============================================================
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');
             const toggleIcon = document.getElementById('togglePassword');
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleIcon.textContent = '🔒';
@@ -378,12 +464,18 @@
             }
         }
 
-        const VALID_USERNAME = "0325113895";
-        const VALID_PASSWORD = "FAHAD_146";
+        // ============================================================
+        // LOGIN CREDENTIALS
+        // ============================================================
+        const VALID_USERNAME = "Malik123";
+        const VALID_PASSWORD = "Ali Raza";
 
         let failedAttempts = 0;
         let lockUntil = 0;
 
+        // ============================================================
+        // ATTEMPT LOGIN
+        // ============================================================
         function attemptLogin() {
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
@@ -393,26 +485,37 @@
 
             const now = Date.now();
 
+            // ===== CHECK LOCK =====
             if (lockUntil > now) {
                 const remainingSeconds = Math.ceil((lockUntil - now) / 1000);
                 timerBox.style.display = 'block';
                 timerSpan.textContent = remainingSeconds;
                 errorDiv.textContent = `⛔ Locked. Wait ${remainingSeconds}s`;
-                setTimeout(() => { attemptLogin(); }, 1000);
+
+                setTimeout(() => {
+                    attemptLogin();
+                }, 1000);
                 return;
             } else {
                 timerBox.style.display = 'none';
             }
 
+            // ===== VALIDATE =====
             if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+                // ✅ SUCCESS — REDIRECT TO TOOLKIT
                 window.location.href = 'toolkit.html';
             } else {
+                // ❌ FAILED
                 failedAttempts++;
+
                 if (failedAttempts >= 3) {
+                    // 🔒 LOCK FOR 2 MINUTES
                     lockUntil = now + (2 * 60 * 1000);
                     timerBox.style.display = 'block';
                     timerSpan.textContent = 120;
                     errorDiv.textContent = '❌ Too many wrong attempts. Locked for 2 minutes.';
+
+                    // Auto unlock after 2 minutes
                     setTimeout(() => {
                         failedAttempts = 0;
                         lockUntil = 0;
@@ -425,10 +528,18 @@
             }
         }
 
+        // ============================================================
+        // ENTER KEY SUPPORT
+        // ============================================================
         document.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') { attemptLogin(); }
+            if (e.key === 'Enter') {
+                attemptLogin();
+            }
         });
 
+        // ============================================================
+        // CLEAR ERROR ON INPUT
+        // ============================================================
         document.getElementById('username').addEventListener('input', function() {
             document.getElementById('errorMsg').textContent = '';
         });
@@ -437,4 +548,4 @@
         });
     </script>
 </body>
-</html>
+            </html>
