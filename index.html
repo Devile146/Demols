@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>TECHNICAL FAHAD - Professional Business</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+            font-size: 15px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ff4d6d, #ff8c42);
+            border-radius: 10px;
+        }
+        #fadeOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 99999;
+            animation: fadeOut 1.2s ease-in-out forwards;
+            pointer-events: none;
+        }
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(35px);
+            animation: fadeUp 0.9s ease forwards;
+        }
+        .fade-in-d1 {
+            animation-delay: 0.15s;
+        }
+        .fade-in-d2 {
+            animation-delay: 0.4s;
+        }
+        .fade-in-d3 {
+            animation-delay: 0.65s;
+        }
+        .fade-in-d4 {
+            animation-delay: 0.9s;
+        }
+        .fade-in-d5 {
+            animation-delay: 1.15s;
+        }
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        #navbar {
+            position: sticky;
+            top: 0;
+            z-index: 9998;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 18px;
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 2.5px solid #ff4d6d;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 25px rgba(255, 77, 109, 0.12);
+        }
+        #navbar.scrolled {
+            border-bottom-color: #ff8c42;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 4.5px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        .hamburger:hover {
+            background: rgba(255, 77, 109, 0.08);
+        }
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.8px;
+            background: #ff4d6d;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 5px);
+            background: #ff8c42;
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(4px, -5px);
+            background: #ff8c42;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            background: linear-gradient(135deg, #ff4d6d, #ff8c42, #ff4d6d);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradShift 4s ease infinite;
+        }
+        @keyframes gradShift {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: -380px;
+            width: 340px;
+            height: 100vh;
+            z-index: 99999;
+            transition: left 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        #sidebar.open {
+            left: 0;
+        }
+        .sidebar-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: -1;
+        }
+        .side-corners {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            border: 3px solid transparent;
+            background: linear-gradient(45deg, #ff4d6d, #ff8c42, #ff6b9d, #ffaa5e, #ff4d6d);
+            background-size: 400% 400%;
+            animation: cornerFlow 6s ease infinite;
+            clip-path: inset(0);
+            opacity: 0.15;
+        }
+        @keyframes cornerFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .sidebar-content {
+            position: relative;
+            padding: 40px 22px 30px;
+            color: #fff;
+            z-index: 1;
+        }
+        .sidebar-close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            font-size: 1.8rem;
+            color: #ff4d6d;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 5;
+        }
+        .sidebar-close:hover {
+            transform: rotate(90deg);
+            color: #ff8c42;
+        }
+        .sidebar-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 28px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #ff4d6d;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .sidebar-content h2 i {
+            color: #ff8c42;
+            font-size: 1.5rem;
+        }
+        .cat-parent {
+            margin-bottom: 5px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s;
+        }
+        .cat-parent:hover {
+            border-color: rgba(255, 77, 109, 0.25);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .cat-parent>span {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 10px;
+        }
+        .cat-parent>span i {
+            width: 24px;
+            font-size: 1.15rem;
+        }
+        .cat-parent>span i.fa-code {
+            color: #ff4d6d;
+        }
+        .cat-parent>span i.fa-tools {
+            color: #ff8c42;
+        }
+        .cat-parent>span i.fa-ad {
+            color: #ff6b9d;
+        }
+        .cat-parent>span i.fa-paint-brush {
+            color: #ffaa5e;
+        }
+        .cat-parent>span i.fa-video {
+            color: #4dc9f6;
+        }
+        .cat-parent>span:hover {
+            color: #ff8c42;
+            padding-left: 22px;
+            background: rgba(255, 140, 66, 0.05);
+        }
+        .cat-parent>span .arrow {
+            margin-left: auto;
+            transition: 0.3s;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .cat-parent.open>span .arrow {
+            transform: rotate(180deg);
+            color: #ff8c42;
+        }
+        .sub-cat {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-left: 16px;
+            background: rgba(255, 255, 255, 0.015);
+        }
+        .cat-parent.open .sub-cat {
+            max-height: 350px;
+        }
+        .sub-cat li {
+            padding: 8px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: 0.2s;
+        }
+        .sub-cat li:last-child {
+            border-bottom: none;
+        }
+        .sub-cat li a {
+            color: #bbb;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .sub-cat li a i {
+            width: 18px;
+            font-size: 0.85rem;
+        }
+        .sub-cat li a i.fa-globe {
+            color: #4dc9f6;
+        }
+        .sub-cat li a i.fa-shopping-cart {
+            color: #ff6b9d;
+        }
+        .sub-cat li a i.fa-mobile-alt {
+            color: #ff8c42;
+        }
+        .sub-cat li a i.fa-wordpress {
+            color: #21759b;
+        }
+        .sub-cat li a i.fa-robot {
+            color: #00d4ff;
+        }
+        .sub-cat li a i.fa-chart-pie {
+            color: #ffd700;
+        }
+        .sub-cat li a i.fa-bolt {
+            color: #ffaa5e;
+        }
+        .sub-cat li a i.fa-calculator {
+            color: #4ecdc4;
+        }
+        .sub-cat li a i.fa-instagram {
+            color: #e4405f;
+        }
+        .sub-cat li a i.fa-facebook {
+            color: #1877f2;
+        }
+        .sub-cat li a i.fa-youtube {
+            color: #ff0000;
+        }
+        .sub-cat li a i.fa-tiktok {
+            color: #00f2ea;
+        }
+        .sub-cat li a i.fa-drafting-compass {
+            color: #ff6b6b;
+        }
+        .sub-cat li a i.fa-user-check {
+            color: #51cf66;
+        }
+        .sub-cat li a i.fa-palette {
+            color: #cc5de8;
+        }
+        .sub-cat li a i.fa-play-circle {
+            color: #ff6b9d;
+        }
+        .sub-cat li a i.fa-image {
+            color: #ffd93d;
+        }
+        .sub-cat li a i.fa-project-diagram {
+            color: #4dc9f6;
+        }
+        .sub-cat li a:hover {
+            color: #ff8c42;
+            padding-left: 8px;
+        }
+        .sub-cat li a:hover i {
+            color: #ffd700 !important;
+        }
+        .side-contact {
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(255, 77, 109, 0.15);
+        }
+        .side-contact a {
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .side-contact a i {
+            font-size: 1.4rem;
+            width: 30px;
+            text-align: center;
+        }
+        .side-contact a.whatsapp-side i {
+            color: #25D366;
+        }
+        .side-contact a.telegram-side i {
+            color: #0088cc;
+        }
+        .side-contact a.email-side i {
+            color: #ea4335;
+        }
+        .side-contact a:hover {
+            transform: translateX(5px);
+            background: rgba(255, 77, 109, 0.08);
+            border-color: #ff4d6d;
+        }
+        main {
+            padding: 0 14px 20px 14px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        section {
+            padding: 50px 0 35px;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ff4d6d, #ff8c42, #ff6b9d);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradShift 5s ease infinite;
+            letter-spacing: 0.3px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3.5px;
+            margin: 12px auto 0;
+            background: linear-gradient(90deg, #ff4d6d, #ff8c42, #ff6b9d);
+            border-radius: 4px;
+        }
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            gap: 25px;
+            padding: 15px 0 25px;
+            text-align: center;
+        }
+        .hero-left {
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+        .hero-profile-top {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .profile-ring {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: linear-gradient(135deg, #ff4d6d, #ff8c42, #ff6b9d, #4dc9f6, #ffd700, #ff4d6d);
+            background-size: 400% 400%;
+            animation: spinRing 10s linear infinite, gradShiftRing 4s ease infinite;
+            padding: 5px;
+            box-shadow: 0 0 50px rgba(255, 77, 109, 0.15);
+        }
+        @keyframes spinRing {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes gradShiftRing {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+        .profile-ring img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            animation: spinReverse 10s linear infinite;
+            border: 3px solid #0a0a0a;
+        }
+        @keyframes spinReverse {
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+        .hero-left .badge {
+            display: inline-block;
+            background: rgba(255, 77, 109, 0.12);
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            color: #ff8c42;
+            border: 1px solid rgba(255, 77, 109, 0.15);
+            margin-bottom: 14px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        .hero-left h1 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 6px;
+        }
+        .hero-left h1 .highlight {
+            background: linear-gradient(135deg, #ff4d6d, #ff8c42);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        .hero-left .sub-title {
+            font-size: 1rem;
+            color: #bbb;
+            margin: 12px 0 20px;
+            max-width: 100%;
+            line-height: 1.6;
+        }
+        .hero-left .sub-title i {
+            color: #ff8c42;
+            margin-right: 4px;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ff4d6d, #ff8c42);
+            color: #fff;
+            box-shadow: 0 6px 25px rgba(255, 77, 109, 0.3);
+            animation: btnPulse 2.5s ease infinite;
+        }
+        @keyframes btnPulse {
+            0%,
+            100% {
+                box-shadow: 0 6px 25px rgba(255, 77, 109, 0.3);
+            }
+            50% {
+                box-shadow: 0 6px 40px rgba(255, 77, 109, 0.55);
+            }
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 35px rgba(255, 77, 109, 0.5);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #ff4d6d;
+        }
+        .btn-secondary:hover {
+            background: #ff4d6d;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(255, 77, 109, 0.3);
+        }
+        .hero-stats {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .hero-stats .stat {
+            text-align: center;
+        }
+        .hero-stats .stat .num {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ff8c42;
+        }
+        .hero-stats .stat .label {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 1px;
+        }
+        .about-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            padding: 35px 30px;
+            border: 2px solid transparent;
+            background-image: linear-gradient(#0a0a0a, #0a0a0a),
+                linear-gradient(135deg, #ff4d6d, #ff8c42, #ff6b9d);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            margin: 10px 0 20px;
+        }
+        .about-section h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            color: #ff8c42;
+        }
+        .about-section h2 i {
+            margin-right: 10px;
+        }
+        .about-section p {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .about-section .highlight-text {
+            color: #ff8c42;
+            font-weight: 600;
+        }
+        .about-section .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .about-section .about-grid .about-item {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 14px 16px;
+            border-radius: 14px;
+            border-left: 3px solid #ff4d6d;
+        }
+        .about-section .about-grid .about-item i {
+            color: #ff8c42;
+            margin-right: 8px;
+        }
+        .about-section .about-grid .about-item span {
+            color: #ddd;
+            font-size: 0.9rem;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 22px;
+            padding: 28px 18px 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(4px);
+            border: 2px solid transparent;
+            background-image: linear-gradient(#0a0a0a, #0a0a0a),
+                linear-gradient(135deg, #ff4d6d, #ff8c42, #ff6b9d, #4dc9f6, #ffd700);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+        .service-card:nth-child(1) {
+            background-image: linear-gradient(#0a0a0a, #0a0a0a),
+                linear-gradient(135deg, #ff4d6d, #ff8c42);
+        }
+        .service-card:nth-child(2) {
+            background-image: linear-gradient(#0a0a0a, #0a0a0a),
+                linear-gradient(135deg, #4dc9f6, #00d4ff);
+        }
+        .service-card:nth-child(3) {
+            background-image: linear-gradient(#0a0a0a, #0a0a0a),
+                linear-gradient(135deg, #ff6b9d, #ffaa5e);
+        }
+        .service-card:nth-child(4) {
+            background-image: linear-gradient(#0a0a0a, #0a0a0a),
+                linear-gradient(135deg, #cc5de8, #ff6b6b);
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 77, 109, 0.04), transparent 70%);
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 77, 109, 0.08);
+        }
+        .service-card .icon-wrapper {
+            width: 62px;
+            height: 62px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: 0.4s;
+        }
+        .service-card:nth-child(1) .icon-wrapper {
+            background: rgba(255, 77, 109, 0.12);
+            color: #ff4d6d;
+        }
+        .service-card:nth-child(2) .icon-wrapper {
+            background: rgba(77, 201, 246, 0.12);
+            color: #4dc9f6;
+        }
+        .service-card:nth-child(3) .icon-wrapper {
+            background: rgba(255, 107, 157, 0.12);
+            color: #ff6b9d;
+        }
+        .service-card:nth-child(4) .icon-wrapper {
+            background: rgba(204, 93, 232, 0.12);
+            color: #cc5de8;
+        }
+        .service-card:hover .icon-wrapper {
+            transform: scale(1.05) rotate(-4deg);
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.15);
+        }
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .service-card p {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+        .service-card .card-btn {
+            display: inline-block;
+            padding: 10px 26px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff4d6d, #ff8c42);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            animation: btnPulse 3s ease infinite;
+        }
+        .service-card .card-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(255, 77, 109, 0.35);
+        }
+        .service-card:nth-child(2) .card-btn {
+            background: linear-gradient(135deg, #4dc9f6, #00d4ff);
+        }
+        .service-card:nth-child(3) .card-btn {
+            background: linear-gradient(135deg, #ff6b9d, #ffaa5e);
+        }
+        .service-card:nth-child(4) .card-btn {
+            background: linear-gradient(135deg, #cc5de8, #ff6b6b);
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .demo-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            background-image: linear-gradient(#0a0a0a, #0a0a0a),
+                linear-gradient(135deg, #ff4d6d, #ff8c42, #ff6b9d);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            transition: all 0.4s ease;
+        }
+        .demo-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(255, 140, 66, 0.06);
+        }
+        .demo-item .media-wrap {
+            width: 100%;
+            height: 170px;
+            overflow: hidden;
+            background: #111;
+            position: relative;
+        }
+        .demo-item .media-wrap video,
+        .demo-item .media-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .demo-item:hover .media-wrap video,
+        .demo-item:hover .media-wrap img {
+            transform: scale(1.04);
+        }
+        .demo-item .demo-info {
+            padding: 14px 16px 16px;
+        }
+        .demo-item .demo-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        .demo-item .demo-info p {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        .demo-item .demo-tag {
+            display: inline-block;
+            background: rgba(255, 77, 109, 0.1);
+            color: #ff8c42;
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .contact-boxes {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            flex: 0 1 auto;
+        }
+        .contact-btn {
+            padding: 11px 20px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            min-width: 120px;
+            justify-content: center;
+            animation: btnPulse 3s ease infinite;
+        }
+        .contact-btn i {
+            font-size: 1.3rem;
+            width: 28px;
+            text-align: center;
+        }
+        .contact-btn.whatsapp-btn {
+            background: #25D366;
+        }
+        .contact-btn.telegram-btn {
+            background: #0088cc;
+        }
+        .contact-btn.email-btn {
+            background: #ea4335;
+        }
+        .contact-btn:hover {
+            transform: scale(1.04) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        .contact-info-box {
+            flex: 1;
+            min-width: 200px;
+            max-width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 28px 22px;
+            border: 2px solid transparent;
+            background-image: linear-gradient(#0a0a0a, #0a0a0a),
+                linear-gradient(135deg, #ff4d6d, #ff8c42, #ff6b9d);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+        .contact-info-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            color: #ff8c42;
+        }
+        .contact-info-box .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .contact-info-box .info-item i {
+            color: #ff4d6d;
+            width: 24px;
+            font-size: 1rem;
+        }
+        .contact-info-box .info-item:last-child {
+            border-bottom: none;
+        }
+        .contact-info-box .contact-note {
+            margin-top: 16px;
+            padding: 12px 14px;
+            background: rgba(255, 77, 109, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid #ff4d6d;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+        footer {
+            border-top: 2px solid rgba(255, 77, 109, 0.08);
+            padding: 30px 16px 20px;
+            margin-top: 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto 20px;
+        }
+        .footer-col h4 {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            color: #ff8c42;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            padding: 4px 0;
+        }
+        .footer-col ul li a {
+            color: #ffffff !important;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .footer-col ul li a:hover {
+            color: #ff8c42 !important;
+            padding-left: 4px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 14px;
+            justify-content: flex-start;
+            margin: 8px 0 6px;
+        }
+        .footer-social a {
+            color: #ffffff !important;
+            font-size: 1.3rem;
+            transition: 0.3s;
+        }
+        .footer-social a:hover {
+            color: #ff8c42 !important;
+            transform: translateY(-3px);
+        }
+        .footer-col p {
+            color: #ffffff !important;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #ffffff !important;
+            font-size: 0.8rem;
+        }
+        .footer-bottom p {
+            color: #ffffff !important;
+        }
+        .footer-bottom .heart {
+            color: #ff4d6d;
+            display: inline-block;
+            animation: heartbeat 1.5s ease infinite;
+        }
+        @keyframes heartbeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.15);
+            }
+        }
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4d6d, #ff8c42);
+            color: #fff;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(255, 77, 109, 0.25);
+        }
+        #backToTop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        #backToTop:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+        @media (max-width: 992px) {
+            .hero-left h1 {
+                font-size: 2.2rem;
+            }
+            .profile-ring {
+                width: 140px;
+                height: 140px;
+                border-width: 3px;
+                padding: 4px;
+            }
+        }
+        @media (max-width: 768px) {
+            #navbar {
+                padding: 8px 14px;
+            }
+            .logo {
+                font-size: 1.1rem;
+            }
+            .hamburger span {
+                width: 22px;
+                height: 2.5px;
+            }
+            .hero {
+                min-height: auto;
+                padding: 10px 0 15px;
+                gap: 18px;
+            }
+            .hero-left h1 {
+                font-size: 2rem;
+            }
+            .hero-left .sub-title {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 10px 22px;
+                font-size: 0.8rem;
+            }
+            .profile-ring {
+                width: 120px;
+                height: 120px;
+                border-width: 3px;
+                padding: 4px;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            #sidebar {
+                width: 290px;
+                left: -320px;
+            }
+            .service-card {
+                padding: 22px 14px 18px;
+            }
+            .service-card h3 {
+                font-size: 1.1rem;
+            }
+            .service-card p {
+                font-size: 0.8rem;
+            }
+            .contact-btn {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+                min-width: 100px;
+            }
+            .contact-btn i {
+                font-size: 1.1rem;
+                width: 24px;
+            }
+            .contact-info-box {
+                padding: 20px 16px;
+            }
+            .demo-item .media-wrap {
+                height: 140px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+            }
+            .hero-stats .stat .num {
+                font-size: 1.2rem;
+            }
+            .hero-stats .stat .label {
+                font-size: 0.65rem;
+            }
+            .about-section {
+                padding: 25px 18px;
+            }
+            .about-section h2 {
+                font-size: 1.6rem;
+            }
+            .about-section .about-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-left h1 {
+                font-size: 1.7rem;
+            }
+            .profile-ring {
+                width: 100px;
+                height: 100px;
+                border-width: 2.5px;
+                padding: 3px;
+            }
+            .btn {
+                padding: 8px 18px;
+                font-size: 0.75rem;
+                gap: 6px;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            #sidebar {
+                width: 260px;
+                left: -280px;
+            }
+            .sidebar-content {
+                padding: 30px 16px 20px;
+            }
+            .service-card {
+                padding: 18px 12px 16px;
+            }
+            .service-card .icon-wrapper {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            .service-card h3 {
+                font-size: 1rem;
+            }
+            .contact-btn {
+                padding: 8px 14px;
+                font-size: 0.75rem;
+                min-width: 80px;
+                border-radius: 10px;
+            }
+            .contact-btn i {
+                font-size: 1rem;
+                width: 20px;
+            }
+            .contact-boxes {
+                gap: 8px;
+            }
+            .demo-item .media-wrap {
+                height: 120px;
+            }
+            .hero-stats {
+                gap: 16px;
+            }
+            .hero-stats .stat .num {
+                font-size: 1rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+            }
+            .about-section .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-section h2 {
+                font-size: 1.3rem;
+            }
+            .about-section p {
+                font-size: 0.9rem;
+            }
+        }
+        @media (max-width: 360px) {
+            html {
+                font-size: 13px;
+            }
+            .hero-left h1 {
+                font-size: 1.5rem;
+            }
+            .profile-ring {
+                width: 85px;
+                height: 85px;
+                border-width: 2px;
+                padding: 3px;
+            }
+            .btn {
+                padding: 7px 14px;
+                font-size: 0.7rem;
+            }
+            #sidebar {
+                width: 240px;
+                left: -260px;
+            }
+            .service-card {
+                padding: 14px 10px 14px;
+                border-radius: 16px;
+            }
+            .service-card .icon-wrapper {
+                width: 42px;
+                height: 42px;
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            .contact-btn {
+                padding: 7px 12px;
+                font-size: 0.7rem;
+                min-width: 70px;
+                border-radius: 8px;
+            }
+            .contact-btn i {
+                font-size: 0.9rem;
+                width: 18px;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .demo-item .media-wrap {
+                height: 100px;
+            }
+            .hero-stats .stat .num {
+                font-size: 0.9rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+        }
+        ::selection {
+            background: #ff4d6d;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="fadeOverlay"></div>
+
+    <nav id="navbar">
+        <div class="nav-left">
+            <div class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="logo">TECHNICAL FAHAD</div>
+        </div>
+    </nav>
+
+    <div id="sidebar">
+        <div class="sidebar-blur"></div>
+        <div class="side-corners"></div>
+        <div class="sidebar-content">
+            <div class="sidebar-close" id="sidebarClose">&times;</div>
+            <h2><i class="fas fa-bolt"></i> SERVICES</h2>
+            <ul>
+                <li class="cat-parent">
+                    <span><i class="fas fa-code"></i> Web Development <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <ul class="sub-cat">
+                        <li><a href="#services"><i class="fas fa-globe"></i> Full Stack Websites</a></li>
+                        <li><a href="#services"><i class="fas fa-shopping-cart"></i> E-Commerce Stores</a></li>
+                        <li><a href="#services"><i class="fas fa-mobile-alt"></i> Responsive Design</a></li>
+                        <li><a href="#services"><i class="fas fa-wordpress"></i> WordPress / CMS</a></li>
+                    </ul>
+                </li>
+                <li class="cat-parent">
+                    <span><i class="fas fa-tools"></i> Online Tools <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <ul class="sub-cat">
+                        <li><a href="#services"><i class="fas fa-robot"></i> AI-Powered Tools</a></li>
+                        <li><a href="#services"><i class="fas fa-chart-pie"></i> Analytics Dashboards</a></li>
+                        <li><a href="#services"><i class="fas fa-bolt"></i> Automation Bots</a></li>
+                        <li><a href="#services"><i class="fas fa-calculator"></i> Custom Calculators</a></li>
+                    </ul>
+                </li>
+                <li class="cat-parent">
+                    <span><i class="fas fa-ad"></i> SMM Panels <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <ul class="sub-cat">
+                        <li><a href="#services"><i class="fab fa-instagram"></i> Instagram Growth</a></li>
+                        <li><a href="#services"><i class="fab fa-facebook"></i> Facebook Ads</a></li>
+                        <li><a href="#services"><i class="fab fa-youtube"></i> YouTube Promotion</a></li>
+                        <li><a href="#services"><i class="fab fa-tiktok"></i> TikTok Engagement</a></li>
+                    </ul>
+                </li>
+                <li class="cat-parent">
+                    <span><i class="fas fa-paint-brush"></i> UI/UX Design <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <ul class="sub-cat">
+                        <li><a href="#services"><i class="fas fa-drafting-compass"></i> Modern UI Design</a></li>
+                        <li><a href="#services"><i class="fas fa-user-check"></i> User Experience</a></li>
+                        <li><a href="#services"><i class="fas fa-palette"></i> Brand Identity</a></li>
+                    </ul>
+                </li>
+                <li class="cat-parent">
+                    <span><i class="fas fa-video"></i> Demos <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <ul class="sub-cat">
+                        <li><a href="#demos"><i class="fas fa-play-circle"></i> Video Demos</a></li>
+                        <li><a href="#demos"><i class="fas fa-image"></i> Photo Demos</a></li>
+                        <li><a href="#demos"><i class="fas fa-project-diagram"></i> Project Showcase</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="side-contact">
+                <a href="https://wa.me/923251138960" target="_blank" class="whatsapp-side"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://t.me/yourtelegram" target="_blank" class="telegram-side"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="mailto:your@email.com" class="email-side"><i class="fas fa-envelope"></i> Email</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+
+        <section class="hero" id="home">
+            <div class="hero-left">
+                <div class="hero-profile-top fade-in fade-in-d1">
+                    <div class="profile-ring">
+                        <img src="https://your-raw-github-link/Fahad.jpg" alt="FAHAD">
+                    </div>
+                </div>
+                <div class="badge fade-in fade-in-d1"><i class="fas fa-crown"></i> Professional Services</div>
+                <h1 class="fade-in fade-in-d1">TECHNICAL <br><span class="highlight">FAHAD</span></h1>
+                <p class="sub-title fade-in fade-in-d2"><i class="fas fa-rocket"></i> Web Developer &bull; SMM Panel Expert &bull; Tools Creator</p>
+                <div class="hero-btns fade-in fade-in-d3">
+                    <a href="#services" class="btn btn-primary"><i class="fas fa-eye"></i> Explore</a>
+                    <a href="#contact" class="btn btn-secondary"><i class="fas fa-headset"></i> Contact</a>
+                </div>
+                <div class="hero-stats fade-in fade-in-d4">
+                    <div class="stat"><div class="num">50+</div><div class="label">Projects</div></div>
+                    <div class="stat"><div class="num">100%</div><div class="label">Satisfaction</div></div>
+                    <div class="stat"><div class="num">24/7</div><div class="label">Support</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="about-section fade-in fade-in-d1">
+                <h2><i class="fas fa-user-tie"></i> About Me</h2>
+                <p>
+                    <span class="highlight-text">Assalam-o-Alaikum! I'm FAHAD</span>, a passionate
+                    <span class="highlight-text">Professional Web Developer</span> with <span class="highlight-text">5+ years</span>
+                    of experience in creating stunning, high-performance websites and digital solutions.
+                </p>
+                <p>
+                    I specialize in <span class="highlight-text">Web Development</span>,
+                    <span class="highlight-text">SMM Panels</span>,
+                    <span class="highlight-text">Online Tools</span>, and
+                    <span class="highlight-text">UI/UX Design</span>.
+                    My mission is to deliver <span class="highlight-text">clean, modern, and responsive</span>
+                    websites that help businesses grow online.
+                </p>
+                <div class="about-grid">
+                    <div class="about-item"><i class="fas fa-check-circle"></i> <span>100+ Happy Clients</span></div>
+                    <div class="about-item"><i class="fas fa-code"></i> <span>50+ Projects Completed</span></div>
+                    <div class="about-item"><i class="fas fa-globe"></i> <span>20+ Countries Served</span></div>
+                    <div class="about-item"><i class="fas fa-star"></i> <span>5-Star Ratings</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <h2 class="section-title fade-in">🚀 Premium Services</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in fade-in-d1">
+                    <div class="icon-wrapper"><i class="fas fa-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>Full-stack, E-commerce, CMS with modern tech.</p>
+                    <a href="#" class="card-btn" data-service="Web Development">Get Work</a>
+                </div>
+                <div class="service-card fade-in fade-in-d2">
+                    <div class="icon-wrapper"><i class="fas fa-cogs"></i></div>
+                    <h3>Online Tools</h3>
+                    <p>AI tools, dashboards, automation bots &amp; more.</p>
+                    <a href="#" class="card-btn" data-service="Online Tools">Get Work</a>
+                </div>
+                <div class="service-card fade-in fade-in-d3">
+                    <div class="icon-wrapper"><i class="fas fa-chart-line"></i></div>
+                    <h3>SMM Panels</h3>
+                    <p>Social media growth, ads, engagement services.</p>
+                    <a href="#" class="card-btn" data-service="SMM Panels">Get Work</a>
+                </div>
+                <div class="service-card fade-in fade-in-d4">
+                    <div class="icon-wrapper"><i class="fas fa-paint-brush"></i></div>
+                    <h3>UI/UX Design</h3>
+                    <p>Modern, clean, responsive &amp; attractive designs.</p>
+                    <a href="#" class="card-btn" data-service="UI/UX Design">Get Work</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="demos">
+            <h2 class="section-title fade-in">🎬 Demos</h2>
+            <div class="demo-grid">
+                <div class="demo-item fade-in fade-in-d1">
+                    <div class="media-wrap"><video src="https://your-raw-github-link/demo1.mp4" controls muted></video></div>
+                    <div class="demo-info"><h4>E-Commerce Platform</h4><p>Full-featured online store.</p><span class="demo-tag"><i class="fas fa-video"></i> Video</span></div>
+                </div>
+                <div class="demo-item fade-in fade-in-d2">
+                    <div class="media-wrap"><video src="https://your-raw-github-link/demo2.mp4" controls muted></video></div>
+                    <div class="demo-info"><h4>AI Dashboard</h4><p>Real-time analytics.</p><span class="demo-tag"><i class="fas fa-video"></i> Video</span></div>
+                </div>
+                <div class="demo-item fade-in fade-in-d3">
+                    <div class="media-wrap"><img src="https://your-raw-github-link/demo1.jpg" alt="Demo"></div>
+                    <div class="demo-info"><h4>Modern UI Design</h4><p>Clean &amp; responsive.</p><span class="demo-tag"><i class="fas fa-image"></i> Photo</span></div>
+                </div>
+                <div class="demo-item fade-in fade-in-d4">
+                    <div class="media-wrap"><img src="https://your-raw-github-link/demo2.jpg" alt="Demo"></div>
+                    <div class="demo-info"><h4>SMM Panel</h4><p>Social media dashboard.</p><span class="demo-tag"><i class="fas fa-image"></i> Photo</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title fade-in">📬 Contact</h2>
+            <div class="contact-wrapper">
+                <div class="contact-boxes fade-in fade-in-d1">
+                    <a href="https://wa.me/923251138960" target="_blank" class="contact-btn whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://t.me/yourtelegram" target="_blank" class="contact-btn telegram-btn"><i class="fab fa-telegram"></i> Telegram</a>
+                    <a href="mailto:your@email.com" class="contact-btn email-btn"><i class="fas fa-envelope"></i> Email</a>
+                </div>
+                <div class="contact-info-box fade-in fade-in-d2">
+                    <h3><i class="fas fa-address-card"></i> Details</h3>
+                    <div class="info-item"><i class="fas fa-user"></i> <span>FAHAD</span></div>
+                    <div class="info-item"><i class="fas fa-phone"></i> <span>+92 325 1138960</span></div>
+                    <div class="info-item"><i class="fas fa-envelope"></i> <span>technicalfahad@email.com</span></div>
+                    <div class="info-item"><i class="fab fa-whatsapp"></i> <span>24/7 Available</span></div>
+                    <div class="contact-note"><i class="fas fa-info-circle" style="color:#ff8c42;"></i> Click any button above to contact me directly!</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col"><h4>TECHNICAL FAHAD</h4><ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#demos">Demos</a></li><li><a href="#contact">Contact</a></li></ul></div>
+            <div class="footer-col"><h4>Services</h4><ul><li><a href="#services">Web Development</a></li><li><a href="#services">Online Tools</a></li><li><a href="#services">SMM Panels</a></li><li><a href="#services">UI/UX Design</a></li></ul></div>
+            <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li><li><a href="#">Refund Policy</a></li></ul></div>
+            <div class="footer-col"><h4>Connect</h4><div class="footer-social"><a href="https://wa.me/923251138960" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="https://t.me/yourtelegram" target="_blank"><i class="fab fa-telegram"></i></a><a href="mailto:your@email.com"><i class="fas fa-envelope"></i></a></div><p style="color:#ffffff !important; font-size:0.75rem; margin-top:6px;">24/7 Support</p></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2026 <strong>TECHNICAL FAHAD</strong>. All Rights Reserved. <span class="heart">❤️</span></p></div>
+    </footer>
+
+    <button id="backToTop" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarClose = document.getElementById('sidebarClose');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            hamburger.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleSidebar);
+        sidebarClose.addEventListener('click', toggleSidebar);
+
+        document.addEventListener('click', function(e) {
+            if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+                toggleSidebar();
+            }
+        });
+
+        document.querySelectorAll('.cat-parent > span').forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.parentElement.classList.toggle('open');
+            });
+        });
+
+        document.querySelectorAll('.sub-cat a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId.startsWith('#')) {
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        if (sidebar.classList.contains('open')) toggleSidebar();
+                    }
+                }
+            });
+        });
+
+        const whatsappNumber = '923251138960';
+
+        const serviceMessages = {
+            'Web Development': 'Hello Sir ! How Are You 😊❣️ Sir I want My Own "Web Development" Service. So Please Response Me & Lets Start A Deal For My Work.',
+            'Online Tools': 'Hello Sir ! How Are You 😊❣️ Sir I want My Own "Online Tools" Service. So Please Response Me & Lets Start A Deal For My Work.',
+            'SMM Panels': 'Hello Sir ! How Are You 😊❣️ Sir I want My Own "SMM Panel" Service. So Please Response Me & Lets Start A Deal For My Work.',
+            'UI/UX Design': 'Hello Sir ! How Are You 😊❣️ Sir I want My Own "UI/UX Design" Service. So Please Response Me & Lets Start A Deal For My Work.'
+        };
+
+        document.querySelectorAll('.card-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const service = this.getAttribute('data-service') || 'Service';
+                const msg = serviceMessages[service] ||
+                    'Hello Sir ! How Are You 😊❣️ Sir I want My Own Service. So Please Response Me & Lets Start A Deal For My Work.';
+                const url = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(msg);
+                window.open(url, '_blank');
+            });
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        });
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('open')) toggleSidebar();
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        document.querySelectorAll('.demo-item video').forEach(function(video) {
+            video.addEventListener('click', function() { this.paused ? this.play() : this.pause(); });
+        });
+
+        console.log('🔥 TECHNICAL FAHAD - Professional Website');
+        console.log('📞 Contact: +92 325 1138960');
+        console.log('✅ All systems ready!');
+        console.log('💼 "Get Work" buttons configured with auto-messages!');
+    </script>
+</body>
+</html>
