@@ -97,7 +97,22 @@
         body.theme-black .about-section {
             background: rgba(255, 255, 255, 0.03) !important;
             backdrop-filter: blur(12px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.04) !important;
+            border: 2px solid transparent !important;
+            background-clip: padding-box !important;
+        }
+        body.theme-black .about-section::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 24px;
+            padding: 2px;
+            background: linear-gradient(135deg, #ff4d6d, #ff8c42, #ff6b9d, #4dc9f6, #ffd700, #ff4d6d);
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderSpin 4s linear infinite;
+            z-index: -1;
         }
         body.theme-black .about-section h2 {
             color: #ff8c42 !important;
@@ -332,6 +347,9 @@
             background-size: 400% 400% !important;
             animation: spinRing 12s linear infinite, gradShiftRing 3s ease infinite !important;
         }
+        body.theme-black .profile-ring img {
+            border-color: #0a0a0a !important;
+        }
 
         /* ===== WHITE THEME (DEFAULT) ===== */
         body.theme-white {
@@ -564,7 +582,21 @@
             color: #555 !important;
         }
 
-        /* Contact - Animated Borders */
+        /* Contact - Animated Borders - CENTERED */
+        body.theme-white .contact-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+        }
+        body.theme-white .contact-boxes {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
         body.theme-white .contact-info-box {
             background: rgba(255, 255, 255, 0.6) !important;
             backdrop-filter: blur(12px) !important;
@@ -572,6 +604,9 @@
             border: 2px solid transparent !important;
             background-clip: padding-box !important;
             position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
         }
         body.theme-white .contact-info-box::before {
             content: '';
@@ -589,10 +624,12 @@
         }
         body.theme-white .contact-info-box h3 {
             color: #ff4d6d !important;
+            text-align: center;
         }
         body.theme-white .contact-info-box .info-item {
             color: #333 !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+            justify-content: center;
         }
         body.theme-white .contact-info-box .info-item i {
             color: #ff4d6d !important;
@@ -601,6 +638,7 @@
             color: #444 !important;
             background: rgba(255, 77, 109, 0.06) !important;
             border-left: 3px solid #ff4d6d !important;
+            text-align: center;
         }
 
         /* Footer */
@@ -714,6 +752,22 @@
             animation: spinRing 12s linear infinite, gradShiftRing 3s ease infinite !important;
             box-shadow: 0 0 60px rgba(255, 77, 109, 0.15);
         }
+        body.theme-white .profile-ring img {
+            border-color: #ffffff !important;
+        }
+
+        /* ===== COMMON PROFILE RING ===== */
+        .profile-ring {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            padding: 4px;
+            box-shadow: 0 0 60px rgba(255, 77, 109, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         @keyframes spinRing {
             to {
                 transform: rotate(360deg);
@@ -734,7 +788,7 @@
             border-radius: 50%;
             object-fit: cover;
             animation: spinReverse 12s linear infinite;
-            border: 3px solid #ffffff;
+            border: 3px solid;
         }
         @keyframes spinReverse {
             to {
@@ -1235,21 +1289,6 @@
             justify-content: center;
             margin-bottom: 15px;
         }
-        .profile-ring {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            padding: 4px;
-            box-shadow: 0 0 60px rgba(255, 77, 109, 0.15);
-        }
-        .profile-ring img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #ffffff;
-        }
         .hero-left .badge {
             display: inline-block;
             padding: 3px 14px;
@@ -1564,21 +1603,20 @@
             margin-top: 4px;
         }
 
-        /* ===== CONTACT ===== */
+        /* ===== CONTACT - CENTERED ===== */
         .contact-wrapper {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
             gap: 25px;
-            justify-content: center;
-            align-items: flex-start;
+            width: 100%;
         }
         .contact-boxes {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
             justify-content: center;
-            flex: 0 1 auto;
         }
         .contact-btn {
             padding: 10px 18px;
@@ -1615,17 +1653,19 @@
             transform: scale(1.04) translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
+
         .contact-info-box {
-            flex: 1;
-            min-width: 180px;
-            max-width: 100%;
-            border-radius: 18px;
-            padding: 24px 20px;
+            background: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
             border: 2px solid transparent !important;
             background-clip: padding-box !important;
             position: relative;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            border-radius: 18px;
+            padding: 24px 20px;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
         }
         .contact-info-box::before {
             content: '';
@@ -1644,6 +1684,7 @@
         .contact-info-box h3 {
             font-size: 1.1rem;
             margin-bottom: 14px;
+            text-align: center;
         }
         .contact-info-box .info-item {
             display: flex;
@@ -1652,6 +1693,7 @@
             padding: 6px 0;
             border-bottom: 1px solid;
             font-size: 0.85rem;
+            justify-content: center;
         }
         .contact-info-box .info-item i {
             width: 22px;
@@ -1666,6 +1708,7 @@
             border-radius: 10px;
             border-left: 3px solid;
             font-size: 0.8rem;
+            text-align: center;
         }
 
         /* ===== FOOTER ===== */
@@ -1772,10 +1815,12 @@
             .profile-ring {
                 width: 120px;
                 height: 120px;
-                padding: 4px;
             }
             section {
                 padding: 30px 0 20px;
+            }
+            .contact-info-box {
+                max-width: 420px;
             }
         }
         @media (max-width: 768px) {
@@ -1807,7 +1852,6 @@
             .profile-ring {
                 width: 100px;
                 height: 100px;
-                padding: 3px;
             }
             .section-title {
                 font-size: 1.6rem;
@@ -1836,6 +1880,7 @@
             }
             .contact-info-box {
                 padding: 18px 14px;
+                max-width: 100%;
             }
             .demo-item .media-wrap {
                 height: 120px;
@@ -1874,7 +1919,6 @@
             .profile-ring {
                 width: 85px;
                 height: 85px;
-                padding: 3px;
             }
             .btn {
                 padding: 7px 14px;
@@ -1941,6 +1985,9 @@
             main {
                 padding: 0 8px 10px 8px;
             }
+            .contact-info-box {
+                padding: 16px 12px;
+            }
         }
         @media (max-width: 360px) {
             html {
@@ -1952,7 +1999,6 @@
             .profile-ring {
                 width: 75px;
                 height: 75px;
-                padding: 2px;
             }
             .btn {
                 padding: 6px 12px;
@@ -2024,7 +2070,7 @@
                 <span></span>
                 <span></span>
             </div>
-            <div class="logo">TECHNICAL FAHAD</div>
+            <div class="logo">꧁༺ 𝕋𝔼ℂℍℕ𝕀ℂ𝔸𝕃 𝔽𝔸ℍ𝔸𝔻 ༻꧂</div>
         </div>
     </nav>
 
@@ -2037,7 +2083,7 @@
             <h2><i class="fas fa-bolt"></i> SERVICES</h2>
             <ul>
                 <li class="cat-parent">
-                    <span><i class="fas fa-code"></i> Web Development <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <span><i class="fas fa-code"></i> ༺ 𝑊𝑒𝑏 𝐷𝑒𝑣𝑒𝑙𝑜𝑝𝑚𝑒𝑛𝑡༻<span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
                     <ul class="sub-cat">
                         <li><a href="#services"><i class="fas fa-globe"></i> Full Stack Websites</a></li>
                         <li><a href="#services"><i class="fas fa-shopping-cart"></i> E-Commerce Stores</a></li>
@@ -2046,7 +2092,7 @@
                     </ul>
                 </li>
                 <li class="cat-parent">
-                    <span><i class="fas fa-robot"></i> Telegram Bot <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <span><i class="fas fa-robot"></i>༺ 𝑇𝑒𝑙𝑒𝑔𝑟𝑎𝑚 𝐵𝑜𝑡𝑠 ༻<span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
                     <ul class="sub-cat">
                         <li><a href="#services"><i class="fas fa-bot"></i> Custom Bots</a></li>
                         <li><a href="#services"><i class="fas fa-comment-dots"></i> Auto-Reply Bots</a></li>
@@ -2054,7 +2100,7 @@
                     </ul>
                 </li>
                 <li class="cat-parent">
-                    <span><i class="fas fa-tools"></i> Online Tools <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <span><i class="fas fa-tools"></i>༺ 𝑂𝑛𝑙𝑖𝑛𝑒 𝑇𝑜𝑜𝑙𝑘𝑖𝑡𝑠 ༻<span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
                     <ul class="sub-cat">
                         <li><a href="#services"><i class="fas fa-robot"></i> AI-Powered Tools</a></li>
                         <li><a href="#services"><i class="fas fa-chart-pie"></i> Analytics Dashboards</a></li>
@@ -2063,7 +2109,7 @@
                     </ul>
                 </li>
                 <li class="cat-parent">
-                    <span><i class="fas fa-ad"></i> SMM Panels <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <span><i class="fas fa-ad"></i>༺ 𝑆𝑚𝑚 𝑃𝑒𝑛𝑛𝑎𝑙𝑠 ༻<span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
                     <ul class="sub-cat">
                         <li><a href="#services"><i class="fab fa-instagram"></i> Instagram Growth</a></li>
                         <li><a href="#services"><i class="fab fa-facebook"></i> Facebook Ads</a></li>
@@ -2072,7 +2118,7 @@
                     </ul>
                 </li>
                 <li class="cat-parent">
-                    <span><i class="fas fa-paint-brush"></i> UI/UX Design <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <span><i class="fas fa-paint-brush"></i>༺ 𝐻𝑎𝑐𝑘𝑖𝑛𝑔 𝑇𝑜𝑜𝑙𝑠 ༻<span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
                     <ul class="sub-cat">
                         <li><a href="#services"><i class="fas fa-drafting-compass"></i> Modern UI Design</a></li>
                         <li><a href="#services"><i class="fas fa-user-check"></i> User Experience</a></li>
@@ -2080,7 +2126,7 @@
                     </ul>
                 </li>
                 <li class="cat-parent">
-                    <span><i class="fas fa-graduation-cap"></i> Student Toolkit <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <span><i class="fas fa-graduation-cap"></i>༺ 𝑆𝑡𝑢𝑑𝑒𝑛𝑡 𝑇𝑜𝑜𝑙𝑘𝑖𝑡 ༻<span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
                     <ul class="sub-cat">
                         <li><a href="#services"><i class="fas fa-book"></i> Study Resources</a></li>
                         <li><a href="#services"><i class="fas fa-tools"></i> Hacking Tools</a></li>
@@ -2088,7 +2134,7 @@
                     </ul>
                 </li>
                 <li class="cat-parent">
-                    <span><i class="fas fa-video"></i> Demos <span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
+                    <span><i class="fas fa-video"></i>༺ 𝐷𝑒𝑚𝑜𝑠 ༻<span class="arrow"><i class="fas fa-chevron-down"></i></span></span>
                     <ul class="sub-cat">
                         <li><a href="#demos"><i class="fas fa-play-circle"></i> Video Demos</a></li>
                         <li><a href="#demos"><i class="fas fa-image"></i> Photo Demos</a></li>
@@ -2133,17 +2179,17 @@
                         <img src="https://raw.githubusercontent.com/Devile146/Demols/main/Fahad.jpg" alt="FAHAD">
                     </div>
                 </div>
-                <div class="badge fade-in fade-in-d1"><i class="fas fa-crown"></i> Professional Services</div>
-                <h1 class="fade-in fade-in-d1">TECHNICAL <br><span class="highlight">FAHAD</span></h1>
-                <p class="sub-title fade-in fade-in-d2"><i class="fas fa-rocket"></i> Developer &bull; Student &bull; Creator</p>
+                <div class="badge fade-in fade-in-d1"><i class="fas fa-crown"></i> 𝚙𝚛𝚘𝚏𝚎𝚜𝚜𝚒𝚘𝚗𝚊𝚕 𝚜𝚎𝚛𝚟𝚒𝚌𝚎𝚜</div>
+                <h1 class="fade-in fade-in-d1"> 𝑻𝑬𝑪𝑯𝑵𝑰𝑪𝑨𝑳 <br><span class="highlight">𝑭𝑨𝑯𝑨𝑫</span></h1>
+                <p class="sub-title fade-in fade-in-d2"><i class="fas fa-rocket"></i> 𝘋𝘦𝘷𝘦𝘭𝘰𝘱𝘦𝘳 &bull; 𝘚𝘵𝘶𝘥𝘦𝘯𝘵 &bull; 𝘊𝘳𝘦𝘢𝘵𝘰𝘳</p>
                 <div class="hero-btns fade-in fade-in-d3">
-                    <a href="#services" class="btn btn-primary"><i class="fas fa-eye"></i> Explore</a>
-                    <a href="#contact" class="btn btn-secondary"><i class="fas fa-headset"></i> Contact</a>
+                    <a href="#services" class="btn btn-primary"><i class="fas fa-eye"></i> 𝑬𝒙𝒑𝒍𝒐𝒓𝒆</a>
+                    <a href="#contact" class="btn btn-secondary"><i class="fas fa-headset"></i> 𝑪𝒐𝒏𝒕𝒂𝒄𝒕</a>
                 </div>
                 <div class="hero-stats fade-in fade-in-d4">
-                    <div class="stat"><div class="num">50+</div><div class="label">Projects</div></div>
-                    <div class="stat"><div class="num">100%</div><div class="label">Satisfaction</div></div>
-                    <div class="stat"><div class="num">24/7</div><div class="label">Support</div></div>
+                    <div class="stat"><div class="num">50+</div><div class="label">𝐏𝐫𝐨𝐣𝐞𝐜𝐭𝐬</div></div>
+                    <div class="stat"><div class="num">100%</div><div class="label">𝐒𝐚𝐭𝐢𝐬𝐟𝐚𝐜𝐭𝐢𝐨𝐧</div></div>
+                    <div class="stat"><div class="num">24/7</div><div class="label">𝐒𝐮𝐩𝐩𝐨𝐫𝐭</div></div>
                 </div>
             </div>
         </section>
@@ -2151,23 +2197,23 @@
         <!-- ABOUT -->
         <section id="about">
             <div class="about-section fade-in fade-in-d1">
-                <h2><i class="fas fa-user-tie"></i> About Me</h2>
+                <h2><i class="fas fa-user-tie"></i> 𝗔𝗕𝗢𝗨𝗧</h2>
                 <p>
-                    <span class="highlight-text">Assalam-o-Alaikum! I'm FAHAD</span> — a <span class="highlight-text">Student</span>
-                    with deep knowledge of <span class="highlight-text">Hacking</span>, <span class="highlight-text">Development</span>,
-                    and <span class="highlight-text">Cyber Security</span>.
+                    <span class="highlight-text">𝘼𝙨𝙨𝙖𝙡𝙖𝙢 𝘼𝙡𝙖𝙞𝙠𝙪𝙢!   𝙄'𝙢 𝙁𝘼𝙃𝘼𝘿</span>  𝙄𝙢 𝘼 <span class="highlight-text">𝙎𝙏𝙐𝘿𝙀𝙉𝙏</span>
+                    𝙒𝙞𝙩𝙝 𝘿𝙚𝙚𝙥 𝙆𝙣𝙤𝙬𝙡𝙖𝙙𝙜𝙚 𝙤𝙛 <span class="highlight-text">𝙃𝘼𝘾𝙆𝙄𝙉𝙂</span>, <span class="highlight-text">𝘿𝙀𝙑𝙀𝙇𝙊𝙋𝙈𝙀𝙉𝙏</span>,
+                    𝙖𝙣𝙙 <span class="highlight-text">𝙋𝙃𝙊𝙉𝙀 𝙎𝙀𝙏𝙏𝙄𝙉𝙂𝙎</span>.
                 </p>
                 <p>
-                    I build <span class="highlight-text">Websites</span>, <span class="highlight-text">Telegram Bots</span>,
-                    <span class="highlight-text">Security Tools</span>, <span class="highlight-text">Premium Apps</span>,
-                    and <span class="highlight-text">Games</span>. Learning &amp; creating every day!
+                    𝒊 𝒃𝒖𝒊𝒍𝒅 <span class="highlight-text">𝑾𝒆𝒃𝒔𝒊𝒕𝒆𝒔</span>, <span class="highlight-text">𝑻𝒆𝒍𝒆𝒈𝒓𝒂𝒎 𝑩𝒐𝒕𝒔</span>,
+                    <span class="highlight-text">𝑺𝒆𝒄𝒖𝒊𝒓𝒕𝒚 𝒕𝒐𝒐𝒍𝒔</span>, <span class="highlight-text">𝑶𝒏𝒍𝒊𝒏𝒆 𝑻𝒐𝒐𝒍𝒔</span>,
+                    𝒂𝒏𝒅 <span class="highlight-text">𝑨𝒑𝒑𝒔</span>. 𝑳𝒆𝒂𝒓𝒏𝒊𝒏𝒈 &amp; 𝑪𝒓𝒆𝒂𝒕𝒊𝒏𝒈 𝑬𝒗𝒆𝒓𝒚𝑫𝒂𝒚..
                 </p>
                 <div class="about-grid">
-                    <div class="about-item"><i class="fas fa-code"></i> <span>Web Developer</span></div>
-                    <div class="about-item"><i class="fas fa-robot"></i> <span>Bot Creator</span></div>
-                    <div class="about-item"><i class="fas fa-user-graduate"></i> <span>Student</span></div>
-                    <div class="about-item"><i class="fas fa-shield-alt"></i> <span>Security Researcher</span></div>
-                    <div class="about-item"><i class="fas fa-gamepad"></i> <span>Apps/Games</span></div>
+                      <div class="about-item"><i class="fas fa-user-graduate"></i> <span>𝗦𝘁𝘂𝗱𝗲𝗻𝘁</span></div>
+                    <div class="about-item"><i class="fas fa-code"></i> <span>𝗪𝗲𝗯 𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿</span></div>
+                    <div class="about-item"><i class="fas fa-robot"></i> <span>𝗕𝗼𝘁𝘀 𝗖𝗿𝗲𝗮𝘁𝗼𝗿</span></div>
+                    <div class="about-item"><i class="fas fa-shield-alt"></i> <span>𝗦𝗲𝗰𝘂𝗶𝗿𝘁𝘆 𝗥𝗲𝗦𝗲𝗮𝗿𝗰𝗵𝗲𝗿</span></div>
+                    <div class="about-item"><i class="fas fa-gamepad"></i> <span>𝗛𝗮𝗰𝗸𝗶𝗻𝗴 𝗧𝗼𝗼𝗹𝘀</span></div>
                 </div>
             </div>
         </section>
@@ -2178,39 +2224,39 @@
             <div class="services-grid">
                 <div class="service-card fade-in fade-in-d1">
                     <div class="icon-wrapper"><i class="fas fa-code"></i></div>
-                    <h3>Web Development</h3>
+                    <h3>『 𝐖𝐞𝐛 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐦𝐞𝐧𝐭 』</h3>
                     <p>Full-stack, E-commerce, CMS, custom websites.</p>
-                    <a href="#" class="card-btn" data-service="Web Development">Get Service</a>
+                    <a href="#" class="card-btn" data-service="Web Development">𝑺𝒕𝒂𝒓𝒕 𝑫𝒆𝒗𝒆𝒍𝒐𝒑</a>
                 </div>
                 <div class="service-card fade-in fade-in-d2">
                     <div class="icon-wrapper"><i class="fas fa-robot"></i></div>
-                    <h3>Telegram Bot</h3>
+                    <h3>『 𝐓𝐞𝐥𝐞𝐠𝐫𝐚𝐦 𝐁𝐨𝐭𝐬 』</h3>
                     <p>Custom bots, auto-reply, analytics &amp; more.</p>
-                    <a href="#" class="card-btn" data-service="Telegram Bot">Get Service</a>
+                    <a href="#" class="card-btn" data-service="Telegram Bot">𝑺𝒕𝒂𝒓𝒕 𝑫𝒆𝒗𝒆𝒍𝒐𝒑</a>
                 </div>
                 <div class="service-card fade-in fade-in-d3">
                     <div class="icon-wrapper"><i class="fas fa-tools"></i></div>
-                    <h3>Online Tools</h3>
+                    <h3>『 𝐎𝐧𝐥𝐢𝐧𝐞 𝐓𝐨𝐨𝐥𝐬 』</h3>
                     <p>AI tools, dashboards, automation bots &amp; more.</p>
-                    <a href="#" class="card-btn" data-service="Online Tools">Get Service</a>
+                    <a href="#" class="card-btn" data-service="Online Tools">𝑺𝒕𝒂𝒓𝒕 𝑫𝒆𝒗𝒆𝒍𝒐𝒑</a>
                 </div>
                 <div class="service-card fade-in fade-in-d4">
                     <div class="icon-wrapper"><i class="fas fa-chart-line"></i></div>
-                    <h3>SMM Panels</h3>
+                    <h3>『 𝐒𝐌𝐌 𝐏𝐞𝐧𝐧𝐚𝐥𝐬 』</h3>
                     <p>Social media growth, ads, engagement services.</p>
-                    <a href="#" class="card-btn" data-service="SMM Panels">Get Service</a>
+                    <a href="#" class="card-btn" data-service="SMM Panels">𝑺𝒕𝒂𝒓𝒕 𝑫𝒆𝒗𝒆𝒍𝒐𝒑</a>
                 </div>
                 <div class="service-card fade-in fade-in-d5">
                     <div class="icon-wrapper"><i class="fas fa-paint-brush"></i></div>
-                    <h3>UI/UX Design</h3>
+                    <h3>『 𝐇𝐚𝐜𝐤𝐢𝐧𝐠 𝐓𝐨𝐨𝐥𝐬 』</h3>
                     <p>Modern, clean, responsive &amp; attractive designs.</p>
-                    <a href="#" class="card-btn" data-service="UI/UX Design">Get Service</a>
+                    <a href="#" class="card-btn" data-service="UI/UX Design">𝑺𝒕𝒂𝒓𝒕 𝑫𝒆𝒗𝒆𝒍𝒐𝒑</a>
                 </div>
                 <div class="service-card fade-in fade-in-d6">
                     <div class="icon-wrapper"><i class="fas fa-graduation-cap"></i></div>
-                    <h3>Student Toolkit</h3>
+                    <h3>『 𝐒𝐭𝐮𝐝𝐞𝐧𝐭 𝐓𝐨𝐨𝐥𝐤𝐢𝐭 』</h3>
                     <p>Study resources, hacking tools, premium apps &amp; games.</p>
-                    <a href="#" class="card-btn" data-service="Student Toolkit">Get Service</a>
+                    <a href="#" class="card-btn" data-service="Student Toolkit">𝑺𝒕𝒂𝒓𝒕 𝑫𝒆𝒗𝒆𝒍𝒐𝒑</a>
                 </div>
             </div>
         </section>
@@ -2251,17 +2297,16 @@
             <h2 class="section-title fade-in">📬 Contact</h2>
             <div class="contact-wrapper">
                 <div class="contact-boxes fade-in fade-in-d1">
-                    <a href="https://wa.me/923251138960" target="_blank" class="contact-btn whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                    <a href="https://t.me/yourtelegram" target="_blank" class="contact-btn telegram-btn"><i class="fab fa-telegram"></i> Telegram</a>
-                    <a href="mailto:your@email.com" class="contact-btn email-btn"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://wa.me/923251138960" target="_blank" class="contact-btn whatsapp-btn"><i class="fab fa-whatsapp"></i> 𝑊ℎ𝑎𝑡𝑠𝐴𝑝𝑝</a>
+                    <a href="https://t.me/yourtelegram" target="_blank" class="contact-btn telegram-btn"><i class="fab fa-telegram"></i> 𝑇𝑒𝑙𝑒𝑔𝑟𝑎𝑚</a>
+                    <a href="mailto:your@email.com" class="contact-btn email-btn"><i class="fas fa-envelope"></i>𝐸𝑚𝑎𝑖𝑙</a>
                 </div>
                 <div class="contact-info-box fade-in fade-in-d2">
-                    <h3><i class="fas fa-address-card"></i> Details</h3>
-                    <div class="info-item"><i class="fas fa-user"></i> <span>FAHAD</span></div>
-                    <div class="info-item"><i class="fas fa-phone"></i> <span>+92 325 1138960</span></div>
-                    <div class="info-item"><i class="fas fa-envelope"></i> <span>technicalfahad@email.com</span></div>
-                    <div class="info-item"><i class="fab fa-whatsapp"></i> <span>24/7 Available</span></div>
-                    <div class="contact-note"><i class="fas fa-info-circle" style="color:#ff8c42;"></i> Click any button above to contact me directly!</div>
+                    <h3><i class="fas fa-address-card"></i> 𝗗𝗲𝘁𝗮𝗶𝗹𝘀</h3>
+                    <div class="info-item"><i class="fas fa-user"></i> <span>▯𝐅𝐀𝐇𝐀𝐃 𝐀𝐋𝐈 ▯</span></div>
+                    <div class="info-item"><i class="fas fa-phone"></i> <span>▯ 𝐇𝐈𝐃𝐃𝐄𝐍 ▯</span></div>
+                    <div class="info-item"><i class="fas fa-envelope"></i> <span>▯𝐟𝐚𝐡𝐚𝐝𝐚𝐥𝐢𝟐𝟕𝟐𝟕@𝐠𝐦𝐚𝐢𝐥.𝐜𝐨𝐦▯</span></div>
+                    <div class="info-item"><i class="fab fa-whatsapp"></i> <span>▯𝟐𝟒/𝟕 𝐀𝐯𝐚𝐢𝐥𝐚𝐛𝐥𝐞▯</span></div>
                 </div>
             </div>
         </section>
@@ -2271,12 +2316,12 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-grid">
-            <div class="footer-col"><h4>TECHNICAL FAHAD</h4><ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#demos">Demos</a></li><li><a href="#contact">Contact</a></li></ul></div>
-            <div class="footer-col"><h4>Services</h4><ul><li><a href="#services">Web Development</a></li><li><a href="#services">Telegram Bot</a></li><li><a href="#services">Online Tools</a></li><li><a href="#services">SMM Panels</a></li><li><a href="#services">UI/UX Design</a></li><li><a href="#services">Student Toolkit</a></li></ul></div>
-            <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li><li><a href="#">Refund Policy</a></li></ul></div>
-            <div class="footer-col"><h4>Connect</h4><div class="footer-social"><a href="https://wa.me/923251138960" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="https://t.me/yourtelegram" target="_blank"><i class="fab fa-telegram"></i></a><a href="mailto:your@email.com"><i class="fas fa-envelope"></i></a></div><p>24/7 Support</p></div>
+            <div class="footer-col"><h4>𝑻𝑬𝑪𝑯𝑵𝑰𝑪𝑨𝑳 𝑭𝑨𝑯𝑨𝑫</h4><ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#demos">Demos</a></li><li><a href="#contact">Contact</a></li></ul></div>
+            <div class="footer-col"><h4>𝑺𝒆𝒓𝒗𝒊𝒄𝒆𝒔</h4><ul><li><a href="#services">Web Development</a></li><li><a href="#services">Telegram Bot</a></li><li><a href="#services">Online Tools</a></li><li><a href="#services">SMM Panels</a></li><li><a href="#services">UI/UX Design</a></li><li><a href="#services">Student Toolkit</a></li></ul></div>
+            <div class="footer-col"><h4>𝑳𝒆𝒈𝒂𝒍</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li><li><a href="#">Refund Policy</a></li></ul></div>
+            <div class="footer-col"><h4>𝑪𝒐𝒏𝒏𝒆𝒄𝒕</h4><div class="footer-social"><a href="https://wa.me/923251138960" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="https://t.me/yourtelegram" target="_blank"><i class="fab fa-telegram"></i></a><a href="mailto:your@email.com"><i class="fas fa-envelope"></i></a></div><p>24/7 Support</p></div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2026 <strong>TECHNICAL FAHAD</strong>. All Rights Reserved. <span class="heart">❤️</span></p></div>
+        <div class="footer-bottom"><p>&copy; 𝟐𝟎𝟐𝟔 <strong>𝐓𝐄𝐂𝐇𝐍𝐈𝐂𝐀𝐋 𝐅𝐀𝐇𝐀𝐃</strong>. 𝐀𝐥𝐥 𝐑𝐢𝐠𝐡𝐭𝐚 𝐑𝐞𝐬𝐞𝐫𝐯𝐞𝐝. <span class="heart">❤️</span></p></div>
     </footer>
 
     <!-- BACK TO TOP -->
