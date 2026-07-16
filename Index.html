@@ -526,7 +526,7 @@
         }
 
         /* ============================================================
-                   HERO - Photo on Top
+                   HERO - Photo on TOP
                    ============================================================ */
         .hero {
             display: flex;
@@ -775,7 +775,7 @@
         }
 
         /* ============================================================
-                   SERVICES - "Take Service" Buttons
+                   SERVICES - "Get Work" Buttons
                    ============================================================ */
         .services-grid {
             display: grid;
@@ -1632,7 +1632,7 @@
                 </li>
             </ul>
             <div class="side-contact">
-                <a href="https://wa.me/923251138960?text=Hello%20Sir%20!%20How%20Are%20You%20%E2%9D%A3%EF%B8%8F" target="_blank" class="whatsapp-side"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://wa.me/923251138960" target="_blank" class="whatsapp-side"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                 <a href="https://t.me/yourtelegram" target="_blank" class="telegram-side"><i class="fab fa-telegram"></i> Telegram</a>
                 <a href="mailto:your@email.com" class="email-side"><i class="fas fa-envelope"></i> Email</a>
             </div>
@@ -1701,25 +1701,25 @@
                     <div class="icon-wrapper"><i class="fas fa-code"></i></div>
                     <h3>Web Development</h3>
                     <p>Full-stack, E-commerce, CMS with modern tech.</p>
-                    <a href="#contact" class="card-btn" data-service="Web Development">Take Service</a>
+                    <a href="#" class="card-btn" data-service="Web Development">Get Work</a>
                 </div>
                 <div class="service-card fade-in fade-in-d2">
                     <div class="icon-wrapper"><i class="fas fa-cogs"></i></div>
                     <h3>Online Tools</h3>
                     <p>AI tools, dashboards, automation bots &amp; more.</p>
-                    <a href="#contact" class="card-btn" data-service="Online Tools">Take Service</a>
+                    <a href="#" class="card-btn" data-service="Online Tools">Get Work</a>
                 </div>
                 <div class="service-card fade-in fade-in-d3">
                     <div class="icon-wrapper"><i class="fas fa-chart-line"></i></div>
                     <h3>SMM Panels</h3>
                     <p>Social media growth, ads, engagement services.</p>
-                    <a href="#contact" class="card-btn" data-service="SMM Panels">Take Service</a>
+                    <a href="#" class="card-btn" data-service="SMM Panels">Get Work</a>
                 </div>
                 <div class="service-card fade-in fade-in-d4">
                     <div class="icon-wrapper"><i class="fas fa-paint-brush"></i></div>
                     <h3>UI/UX Design</h3>
                     <p>Modern, clean, responsive &amp; attractive designs.</p>
-                    <a href="#contact" class="card-btn" data-service="UI/UX Design">Take Service</a>
+                    <a href="#" class="card-btn" data-service="UI/UX Design">Get Work</a>
                 </div>
             </div>
         </section>
@@ -1835,22 +1835,26 @@
         });
 
         // ============================================================
-        // 4. WHATSAPP AUTO-MESSAGE WITH CATEGORY NAME
+        // 4. WHATSAPP AUTO-MESSAGE WITH CATEGORY NAME - "Get Work"
         // ============================================================
+        const whatsappNumber = '923251138960';
+
         const serviceMessages = {
-            'Web Development': 'Hello Sir! How Are You 😊 Sir I Want My Own "Web Development" Service. Please Make For Me. Tell Me Your Price & Commission.',
-            'Online Tools': 'Hello Sir! How Are You 😊 Sir I Want My Own "Online Tools" Service. Please Make For Me. Tell Me Your Price & Commission.',
-            'SMM Panels': 'Hello Sir! How Are You 😊 Sir I Want My Own "SMM Panel" Service. Please Make For Me. Tell Me Your Price & Commission.',
-            'UI/UX Design': 'Hello Sir! How Are You 😊 Sir I Want My Own "UI/UX Design" Service. Please Make For Me. Tell Me Your Price & Commission.'
+            'Web Development': 'Hello Sir ! How Are You 😊❣️ Sir I want My Own "Web Development" Service. So Please Response Me & Lets Start A Deal For My Work.',
+            'Online Tools': 'Hello Sir ! How Are You 😊❣️ Sir I want My Own "Online Tools" Service. So Please Response Me & Lets Start A Deal For My Work.',
+            'SMM Panels': 'Hello Sir ! How Are You 😊❣️ Sir I want My Own "SMM Panel" Service. So Please Response Me & Lets Start A Deal For My Work.',
+            'UI/UX Design': 'Hello Sir ! How Are You 😊❣️ Sir I want My Own "UI/UX Design" Service. So Please Response Me & Lets Start A Deal For My Work.'
         };
 
+        // Handle "Get Work" buttons
         document.querySelectorAll('.card-btn').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 const service = this.getAttribute('data-service') || 'Service';
                 const msg = serviceMessages[service] ||
-                    'Hello Sir! How Are You 😊 Sir I Want Your Service. Please Tell Me Price & Commission.';
-                window.open('https://wa.me/923251138960?text=' + encodeURIComponent(msg), '_blank');
+                    'Hello Sir ! How Are You 😊❣️ Sir I want My Own Service. So Please Response Me & Lets Start A Deal For My Work.';
+                const url = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(msg);
+                window.open(url, '_blank');
             });
         });
 
@@ -1908,6 +1912,7 @@
         console.log('🔥 TECHNICAL FAHAD - Professional Website');
         console.log('📞 Contact: +92 325 1138960');
         console.log('✅ All systems ready!');
+        console.log('💼 "Get Work" buttons configured with auto-messages!');
     </script>
 </body>
-</html>
+    </html>
